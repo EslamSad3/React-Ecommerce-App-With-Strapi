@@ -27,6 +27,7 @@ import { useGetproductByNameQuery } from "../../Redux/product";
 import CircularProgress from "@mui/material/CircularProgress";
 function Home() {
   const [open, setOpen] = useState(false);
+  const [clickedProduct, setclickedProduct] = useState({})
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -139,7 +140,14 @@ function Home() {
           direction={"row"}
           alignItems={"center"}
           flexWrap={"wrap"}
-          justifyContent={"space-between"}
+          sx={{
+            [theme.breakpoints.down("sm")]: {
+              justifyContent: "center",
+            },
+            [theme.breakpoints.up("sm")]: {
+              justifyContent: "space-between",
+            },
+          }}
         >
           {data.data.map((item) => {
             return (
@@ -188,7 +196,10 @@ function Home() {
                       <Button
                         sx={{ textTransform: "capitalize" }}
                         size="small"
-                        onClick={handleClickOpen}
+                        onClick={()=>{
+                          handleClickOpen()
+                          setclickedProduct(item)
+                        }}
                       >
                         <AddShoppingCartOutlinedIcon
                           fontSize="small"
@@ -238,7 +249,7 @@ function Home() {
           >
             <Close onClick={handleClose} />
           </IconButton>
-          <ProductDetails />
+          <ProductDetails item={clickedProduct}/>
         </Dialog>
       </Container>
     );
