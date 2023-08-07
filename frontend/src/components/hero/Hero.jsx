@@ -15,8 +15,8 @@ import { useTheme } from "@emotion/react";
 import IconsSection from "./IconsSection";
 
 const mySlider = [
-  { text: "MEN", link: "src/images/banner-15.jpg" },
-  { text: "WOMEN", link: "src/images/banner-25.jpg" },
+  { text: "MEN", link: "./images/banner-15.jpg" },
+  { text: "WOMEN", link: "./images/banner-25.jpg" },
 ];
 function Hero() {
   const theme = useTheme();
@@ -50,7 +50,7 @@ function Hero() {
                       top: "35%",
                       left: "10%",
                       textAlign: "left",
-                      color:"#000"
+                      color: "#000",
                     },
                     [theme.breakpoints.down("sm")]: {
                       py: 4,
@@ -108,7 +108,7 @@ function Hero() {
           }}
         >
           <Box sx={{ position: "relative", mb: 2, mt: 1 }}>
-            <img width={"100%"} src="src\images\banner-17.jpg" alt="" />
+            <img width={"100%"} src="./images/banner-17.jpg" alt="" />
 
             <Stack
               sx={{
@@ -116,7 +116,7 @@ function Hero() {
                 top: "50%",
                 transform: "translateY(-50%)",
                 left: 25,
-                color:"#000"
+                color: "#000",
               }}
             >
               <Typography>New Arrival</Typography>
@@ -139,8 +139,8 @@ function Hero() {
             </Stack>
           </Box>
 
-          <Box sx={{ position: "relative" ,color:"#000"}}>
-            <img width={"100%"} src="src\images\banner-16.jpg" alt="" />
+          <Box sx={{ position: "relative", color: "#000" }}>
+            <img width={"100%"} src="./images/banner-16.jpg" alt="" />
             <Stack
               sx={{
                 position: "absolute",
@@ -149,9 +149,7 @@ function Hero() {
                 left: 25,
               }}
             >
-              <Typography>
-                Gamming 4K
-              </Typography>
+              <Typography>Gamming 4K</Typography>
               <Typography>Summer Sale 20% OFF</Typography>
               <Link
                 sx={{

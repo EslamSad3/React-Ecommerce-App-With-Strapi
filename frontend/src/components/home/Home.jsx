@@ -24,7 +24,7 @@ import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutl
 import { Close } from "@mui/icons-material";
 import ProductDetails from "../products/ProductDetails";
 import { useGetproductByNameQuery } from "../../Redux/product";
-
+import CircularProgress from "@mui/material/CircularProgress";
 function Home() {
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
@@ -35,9 +35,12 @@ function Home() {
   };
 
   const theme = useTheme();
+
   const [alignment, setAlignment] = useState("left");
   const handleAlignment = (event, newAlignment) => {
-    setAlignment(newAlignment);
+    if (newAlignment !== null) {
+      setAlignment(newAlignment);
+    }
   };
 
   const allData = "products?populate=*";
@@ -57,12 +60,22 @@ function Home() {
   };
 
   if (error) {
-    return console.error(error);
+    return (
+      <Container
+        sx={{ display: "flex", justifyContent: "center", my: 20, py: 20 }}
+      >
+        <Typography variant="h6">No Internet Connection</Typography>
+      </Container>
+    );
   } else if (isLoading) {
-    return <Typography variant="h1">Loading.......</Typography>;
+    return (
+      <Container
+        sx={{ display: "flex", justifyContent: "center", my: 10, py: 10 }}
+      >
+        <CircularProgress />
+      </Container>
+    );
   } else {
-    console.log(data.data);
-    console.log(`${import.meta.env.VITE_BASE_URL}`);
     return (
       <Container sx={{ py: 3 }}>
         <Stack
@@ -146,9 +159,7 @@ function Home() {
                 <CardMedia
                   sx={{ height: 250, width: 250 }}
                   title="green iguana"
-                  image={`${
-                    item.attributes.productimgs.data[0].attributes.url
-                  }`}
+                  image={`${item.attributes.productimgs.data[0].attributes.url}`}
                 />
                 <CardContent>
                   <Stack
