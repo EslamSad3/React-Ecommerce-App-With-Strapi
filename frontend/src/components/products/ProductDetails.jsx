@@ -1,8 +1,15 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
-import React from "react";
+import {
+  Box,
+  Button,
+  Stack,
+  ToggleButton,
+  ToggleButtonGroup,
+  Typography,
+} from "@mui/material";
+import React, { useState } from "react";
 import AddShoppingCart from "@mui/icons-material/AddShoppingCart";
 function ProductDetails({ item }) {
-  console.log(item);
+  const [selectedImage, setselectedImage] = useState(0);
   return (
     <Stack
       direction={{ sx: "column", sm: "row" }}
@@ -13,7 +20,7 @@ function ProductDetails({ item }) {
         <img
           width={300}
           height={"100%"}
-          src={item.attributes.productimgs.data[0].attributes.url}
+          src={item.attributes.productimgs.data[selectedImage].attributes.url}
           alt=""
         />
       </Box>
@@ -31,13 +38,42 @@ function ProductDetails({ item }) {
           mt={2}
           justifyContent={{ xs: "center", sm: "flex-start" }}
         >
-          {item.attributes.productimgs.data.map(pic => {
-           return  <img width={75} src={pic.attributes.url} alt=""/>;
-            
-          })}
-          {/* <img width={75} src="src/images/1.jpg" alt="" />
-          <img width={75} src="src/images/1.jpg" alt="" />
-          <img width={75} src="src/images/1.jpg" alt="" /> */}
+          <ToggleButtonGroup
+            value={selectedImage}
+            exclusive
+            sx={{
+              ".Mui-selected": {
+                border: "1px solid royalblue !important",
+                borderRadius: "5px !imporatant",
+                opacity: "1",
+                backgroundColor: "initial",
+              },
+            }}
+          >
+            {item.attributes.productimgs.data.map((pic, index) => {
+              return (
+                <ToggleButton
+                  value={index}
+                  aria-label="left aligned"
+                  sx={{
+                    width: "110px",
+                    height: "110px",
+                    mx: 1,
+                    p: "0",
+                    opacity: "0.5",
+                  }}
+                >
+                  <img
+                    onClick={() => setselectedImage(index)}
+                    width={"100%"}
+                    height={"100%"}
+                    src={pic.attributes.url}
+                    alt=""
+                  />
+                </ToggleButton>
+              );
+            })}
+          </ToggleButtonGroup>
         </Stack>
         <Button
           variant="contained"
